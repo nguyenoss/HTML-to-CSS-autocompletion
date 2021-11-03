@@ -1,7 +1,13 @@
 .vscode/**
 .vscode-test/**
+node_modules
+out/
+src/
 test/**
 .gitignore
+.gitattributes
 jsconfig.json
+tsconfig.json
 vsc-extension-quickstart.md
 .eslintrc.json
+webpack.config.js

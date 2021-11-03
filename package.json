@@ -1,9 +1,19 @@
 {
 	"name": "html-to-css-autocompletion",
-	"displayName": "HTML to CSS autocompletion",
-	"description": "Provides completion suggestions for classes and ids from markup documents to stylesheets.",
-	"version": "1.1.2",
-	"publisher": "solnurkarim",
+  "displayName": "HTML, JSX className to CSS autocompletion",
+	"description": "Provides completion suggestions for class names and ids from markup documents (html,jsx) to stylesheets (css, scss, less, sass, stylus).",
+  "version": "1.2.0",
+	"publisher": "nguyenoss",
+  "author": {
+    "name": "solnurkarim",
+    "url": "https://github.com/solnurkarim/HTML-to-CSS-autocompletion"
+  },
+  "contributors": [
+    {
+      "name": "nguyenoss",
+      "url": "https://github.com/nguyenoss/HTML-to-CSS-autocompletion"
+    }
+  ],
 	"engines": {
 		"vscode": "^1.25.0"
 	},
@@ -14,7 +24,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/solnurkarim/HTML-to-CSS-autocompletion.git"
+		"url": "https://github.com/nguyenoss/HTML-to-CSS-autocompletion.git"
 	},
 	"icon": "assets/logo.png",
 	"categories": [
@@ -51,9 +61,13 @@
 					"type": "array",
 					"default": [
 						"html",
-						"php"
+            "js",
+            "jsx",
+            "ts",
+            "tsx",
+            "php"
 					],
-					"description": "Defines file types to be searched for classes/ids.\r\nDefaults: [\"html\", \"php\"]"
+					"description": "Defines file types to be searched for classes/ids.\r\nDefaults: [\"html\", \"js\", \"jsx\", \"ts\", \"tsx\", \"php\"]"
 				},
 				"html-to-css-autocompletion.folderNamesToBeIncluded": {
 					"type": "array",
@@ -91,10 +105,16 @@
 	},
 	"main": "./extension",
 	"scripts": {
+    "vscode:prepublish": "npm run esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./extension.js --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+    "test-compile": "tsc -p ./",
 		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "node ./node_modules/vscode/bin/test"
+    "test": "node ./node_modules/vscode/bin/test"
 	},
 	"devDependencies": {
+    "esbuild": "^0.13.12",
 		"typescript": "^2.6.1",
 		"vscode": "^1.1.6",
 		"eslint": "^4.11.0",
